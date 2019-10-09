@@ -1,0 +1,45 @@
+Data Is Shallow
+
+We have a Cost
+Cost has: Category | Value | DateTime
+Categories are defined, have Icon <link>
+
+Value is calculated based on Amount | Currency | ExchangeRate
+Value = Amount * ExchangeRate
+Exchange Rate Defaults to 1:1 (1-Current:1-Currency)
+Can be editted per Cost
+
+Spendings:
+DateTime1:
+  Value
+  CategoryId
+  IconLinkId
+  ExchangeId
+DateTime2:...
+
+CategoryId1:
+  Name
+
+Exchange
+
+
+"id": {
+  "value": 120,
+  "categoryId": "id",
+  "iconLinkId": "id",
+  "exchange_rate": 0.23,
+  "exchange_currencyId": "id"
+  }
+
+{
+  "users": {
+  "bTAANQSPoBcGNwg18ZS4e6MEqLm2": {
+    "name": "Badam",
+
+  }
+  },
+
+  "bTAANQSPoBcGNwg18ZS4e6MEqLm2_spendings": {
+
+    },
+}
