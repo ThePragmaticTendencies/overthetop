@@ -1,7 +1,6 @@
 <template>
-<div class="home">
-  <img alt="Vue logo" src="../assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+<div class="row">
+  <Category v-for="item in categories" :category=item />
 </div>
 </template>
 
@@ -12,6 +11,7 @@ import {
   dbRef
 } from '@/firebase/index'
 import HelloWorld from '@/components/HelloWorld.vue'
+import Category from '@/components/Category.vue'
 import {
   SpendingRepository
 } from '@/firebase/repository'
@@ -21,8 +21,14 @@ import {
 
 export default {
   name: 'home',
+  data: function() {
+    return {
+      categories: []
+    }
+  },
   components: {
-    HelloWorld
+    HelloWorld,
+    Category
   },
   mounted() {
     DEV_UTILS.getUserIdAndSeedDb(firebase, dbRef)
@@ -30,12 +36,15 @@ export default {
         console.log(userId)
 
         let repo = new SpendingRepository(dbRef, userId)
-        repo.attachToSpendings((snap) => {
-          console.log(snap.key)
+        repo.attachToCategories((snap) => {
+          console.log(snap.val())
+          this.categories.push(snap.val())
+
+
         })
 
-        repo.addSpending({
-          spending: 10
+        repo.addCategory({
+          name: this.categories.length + 1
         }).then(() => {
           console.log('Added!')
           repo.disconnect()
